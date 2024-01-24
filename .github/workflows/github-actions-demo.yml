@@ -4,6 +4,9 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ci-example
     steps:
       - name: Setup LTS Version of NodeJS
         uses: actions/setup-node@v4
@@ -12,11 +15,8 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Install all Dependencies
-        working-directory: ./ci-example
         run: npm ci
       - name: Run Unit Tests
-        working-directory: ./ci-example
         run: npm run test
       - name: Build App
-        working-directory: ./ci-example
         run: npm run build
