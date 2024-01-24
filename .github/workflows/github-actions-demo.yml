@@ -11,4 +11,5 @@ jobs:
           node-version: 20.11.0
       - name: Check out repository code
         uses: actions/checkout@v4
-      - run: npm install
+      - run: cd ci-example
+      - run: npm ci
