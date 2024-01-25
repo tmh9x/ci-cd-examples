@@ -22,3 +22,5 @@ jobs:
         run: npm run test
       - name: Build App
         run: npm run build
+      - name: Deploy App
+        run: rsync -avz ./build /var/www/html/
