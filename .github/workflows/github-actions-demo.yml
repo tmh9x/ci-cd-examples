@@ -1,9 +1,9 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
-jobs: 
+jobs:
   Explore-GitHub-Actions:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ci-example
@@ -22,5 +22,12 @@ jobs:
         run: npm run test
       - name: Build App
         run: npm run build
-      - name: Deploy App
-        run: sudo rsync -a ./build/ /var/www/html
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: eu-central-1
+      - name: AWS Demo Access
+        run: aws s3 ls
