@@ -1,9 +1,9 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
-jobs:
+jobs: 
   Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     defaults:
       run:
         working-directory: ci-example
@@ -16,7 +16,11 @@ jobs:
         uses: actions/checkout@v4
       - name: Install all Dependencies
         run: npm ci
+      - name: Run Linter
+        run: npm run lint
       - name: Run Unit Tests
         run: npm run test
       - name: Build App
         run: npm run build
+      - name: Deploy App
+        run: sudo rsync -a ./build/ /var/www/html
