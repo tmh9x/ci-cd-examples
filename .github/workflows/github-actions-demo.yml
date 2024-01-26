@@ -31,3 +31,5 @@ jobs:
           aws-region: eu-central-1
       - name: AWS Demo Access
         run: aws s3 ls
+      - name: AWS s3 sync
+        run: aws s3 sync ./build/ s3://${{ secrets.AWS_BUCKET_NAME }}/
